@@ -4,7 +4,10 @@ import Podcast from './Podcast'
 class RemotePlaylistContainer extends Component {
     render(){
         return (
-            <ul>{this.props.podcasts.map(podcast => <Podcast podcast={podcast} savePodcast={this.props.savePodcast}/>)}</ul>
+            <div className="remote-playlist-container">
+                <h4>Remote Podcasts</h4>
+                {/* <ul>{this.props.podcasts.map(podcast => <Podcast key={podcast.name} podcast={podcast} handlePodcast={this.props.handlePodcast}/>)}</ul> */}
+            </div>
         )
     }
 }

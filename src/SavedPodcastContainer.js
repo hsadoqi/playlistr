@@ -4,7 +4,11 @@ import Podcast from './Podcast'
 class SavedPodcastContainer extends Component {
     render(){
         return (
-            <ul>{this.props.podcasts.map(podcast => <Podcast podcast={podcast}/>)}</ul>
+            <div>
+                <h4>Saved Podcasts</h4>
+                {/* <ul>{this.props.podcasts.map(podcast => <Podcast podcast={podcast} handlePodcast={this.props.handlePodcast}/>)}</ul> */}
+            </div>
+            
         )
     }
 }

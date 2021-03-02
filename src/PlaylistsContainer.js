@@ -1,3 +1,4 @@
+import './PlaylistsContainer.css'
 import React, { Component } from "react"
 import RemotePlaylistContainer from './RemotePlaylistContainer'
 import SavedPodcastContainer from './SavedPodcastContainer'
@@ -24,15 +25,19 @@ class PlaylistsContainer extends Component {
 
     savePodcast = (podcast) => {
         this.setState({
-            savedPodcasts: [...this.state.savedPodcasts, podcast]
+            savedPodcasts: [...this.state.savedPodcasts, podcast],
         })
+    }
+
+    removePodcast = (podcast) => {
+
     }
 
     render(){
         return (
-            <div>PlaylistContainer
-            <RemotePlaylistContainer podcasts={this.state.remotePodcasts} savePodcast={this.savePodcast}/>
-            <SavedPodcastContainer podcasts={this.state.savedPodcasts} />
+            <div className="playlists-container">
+            <RemotePlaylistContainer podcasts={this.state.remotePodcasts} handlePodcast={this.savePodcast}/>
+            <SavedPodcastContainer podcasts={this.state.savedPodcasts} handlePodcast={this.removePodcast}/>
             </div>
         )
     }
