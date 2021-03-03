@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Podcast from './Podcast'
+import Podcast from '../components/Podcast'
 
 class RemotePlaylistContainer extends Component {
     render(){

@@ -1,5 +1,5 @@
 import './App.css';
-import PlaylistsContainer from './PlaylistsContainer'
+import PlaylistsContainer from './containers/PlaylistsContainer'
 
 function App() {
   return (
