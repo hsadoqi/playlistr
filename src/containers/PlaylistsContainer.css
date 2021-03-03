@@ -3,7 +3,6 @@
 } */
 
 .playlists-container {
-    /* border: 5px solid black; */
     display: flex;
     flex-direction: row;
     padding-top: 10px;
@@ -12,19 +11,26 @@
 }
 
 .remote-playlist-container {
-    float: left;
-    width: 50%;
-    text-align: center;
-    margin-right: 5px;
-    display: flex;
-    flex-direction: column;
-}
-
-.saved-playlist-container {
     float: right;
     width: 50%;
     text-align: center;
+    margin-right: 5px;
+}
+
+.saved-playlist-container {
+    float: left;
+    width: 50%;
+    text-align: center;
     margin-left: 5px;
-    display: flex;
-    flex-direction: column;
+}
+
+@media only screen and (max-width: 700px){
+    .remote-playlist-container, .saved-playlist-container{
+        width: 100%;
+        float: none;
+    }
+
+    .playlists-container {
+        display: block;
+    }
 }

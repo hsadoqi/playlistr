@@ -1,25 +1,19 @@
 .podcast-cell {
     margin: 10px;
     padding: 5px;
-    text-align: justify;
     border: 2px solid black;
-    border-radius: 25px;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
     align-content: center;
     overflow: auto;
-    height: 75px;
+    position: relative;
     
 }
 
 .podcast-image {
     width: 50px;
     height: 50px;
-    float: left;
-    margin-left: 30px;
+    margin: auto;
     position: relative;
-    resize: both;
 }
 
 .podcast-cell img {
@@ -32,8 +26,7 @@
 .podcast-button {
     height: 50px;
     width: 50px;
-    float: right;
-    margin-right: 30px;
+    margin: auto;
     position: relative;
 }
 
@@ -43,7 +36,6 @@
 }
 
 .podcast-content {
-    height: 60px;
     width: 70%;
     margin: auto;
     overflow: scroll;

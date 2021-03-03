@@ -36,8 +36,8 @@ class PlaylistsContainer extends Component {
     render(){
         return (
             <div className="playlists-container">
-            <RemotePlaylistContainer podcasts={this.state.remotePodcasts} handlePodcast={this.savePodcast}/>
-            <SavedPodcastContainer podcasts={this.state.savedPodcasts} handlePodcast={this.removePodcast}/>
+                <RemotePlaylistContainer podcasts={this.state.remotePodcasts} handlePodcast={this.savePodcast}/>
+                <SavedPodcastContainer podcasts={this.state.savedPodcasts} handlePodcast={this.removePodcast}/>
             </div>
         )
     }
