@@ -1,0 +1,30 @@
+/* div {
+    border: 1px solid red
+} */
+
+.playlists-container {
+    /* border: 5px solid black; */
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    position: relative;
+    min-height: 90%;
+}
+
+.remote-playlist-container {
+    float: left;
+    width: 50%;
+    text-align: center;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.saved-playlist-container {
+    float: right;
+    width: 50%;
+    text-align: center;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './Podcast.css'
 
 class Podcast extends Component {
 
@@ -26,11 +27,20 @@ class Podcast extends Component {
     render(){
         
         return (
-            <li onClick={() => console.log("clicked")}>
-                    <img src={this.props.podcast.image} alt=""/>
-                    <h6>{this.props.podcast.title}</h6>
-                    <p>{this.props.podcast.description}</p>
-                    <button onClick={this.handlePlayPause}> {this.state.play ? "Pause" : "Play"}</button>
+            <li>
+                <div onClick={() => this.props.handlePodcast(this.props.podcast)} className="podcast-cell">
+                        <div className="podcast-image">
+                            <img src={this.props.podcast.image ? this.props.podcast.image : "https://bit.ly/3e378JH"} alt="Podcast"/>
+                        </div>
+                        <div className="podcast-content">
+                            <p id="podcast-title"><strong>{this.props.podcast.title}</strong></p>
+                            <p id="podcast-description">{this.props.podcast.description}</p>
+                        </div>
+                        <div className="podcast-button">
+                        <button onClick={this.handlePlayPause}> {this.state.play ? "Pause" : "Play"}</button>
+                        </div>
+                        
+                </div>
             </li>
         )
     }

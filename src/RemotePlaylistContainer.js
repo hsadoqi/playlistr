@@ -6,7 +6,7 @@ class RemotePlaylistContainer extends Component {
         return (
             <div className="remote-playlist-container">
                 <h4>Remote Podcasts</h4>
-                {/* <ul>{this.props.podcasts.map(podcast => <Podcast key={podcast.name} podcast={podcast} handlePodcast={this.props.handlePodcast}/>)}</ul> */}
+                <ul>{this.props.podcasts.map(podcast => <Podcast key={podcast.name} podcast={podcast} handlePodcast={this.props.handlePodcast}/>)}</ul>
             </div>
         )
     }

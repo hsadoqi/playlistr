@@ -4,9 +4,9 @@ import Podcast from './Podcast'
 class SavedPodcastContainer extends Component {
     render(){
         return (
-            <div>
+            <div className="saved-playlist-container">
                 <h4>Saved Podcasts</h4>
-                {/* <ul>{this.props.podcasts.map(podcast => <Podcast podcast={podcast} handlePodcast={this.props.handlePodcast}/>)}</ul> */}
+                <ul>{this.props.podcasts.map(podcast => <Podcast podcast={podcast} handlePodcast={this.props.handlePodcast}/>)}</ul>
             </div>
             
         )

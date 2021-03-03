@@ -1,10 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 import PlaylistsContainer from './PlaylistsContainer'
 
 function App() {
   return (
-    <div className="App">
+    <div id="main-container">
+      <nav id="playlist-nav">
+        <h1>Playlistr</h1>
+      </nav>
       <PlaylistsContainer/>
     </div>
   );
