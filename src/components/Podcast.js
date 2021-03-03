@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import './Podcast.css'
+import { connect } from 'react-redux'
+import { savePodcast } from '../store/actions/playlistActions'
 
 class Podcast extends Component {
 
@@ -28,7 +30,7 @@ class Podcast extends Component {
         
         return (
             <li>
-                <div onClick={() => this.props.handlePodcast(this.props.podcast)} className="podcast-cell">
+                <div onClick={() => this.props.savePodcast(this.props.podcast)} className="podcast-cell">
                         <div className="podcast-image">
                             <img src={this.props.podcast.image ? this.props.podcast.image : "https://bit.ly/3e378JH"} alt="Podcast"/>
                         </div>
@@ -46,4 +48,4 @@ class Podcast extends Component {
     }
 }
 
-export default Podcast
+export default connect(null, { savePodcast })(Podcast)
