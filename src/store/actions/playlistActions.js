@@ -1,6 +1,8 @@
 // action creators
 const remotePodcasts = (podcasts) => ({type: "FETCH_REMOTE", payload: podcasts})
-const savedPodcast = (podcast) => ({type: 'SAVE_PODCAST', payload: podcast })
+const savedPodcast = (result) => ({type: 'SAVE_PODCAST', payload: result})
+const dragPodcast = (result) => ({type: "REORDER_PODCAST", payload: result})
+const removePodcast = (result) => ({type: "REMOVE_PODCAST", payload: result})
 
 // thunk functions 
 
@@ -14,6 +16,14 @@ export const fetchRemote = () => {
     }
 }
 
-export const savePodcast = (podcast) => {
-    return (dispatch) => dispatch(savedPodcast(podcast))
+export const savePodcast = (result) => {
+    return (dispatch) => dispatch(savedPodcast(result))
+}
+
+export const handleOnDragEnd = (result) => {
+    return (dispatch) => dispatch(dragPodcast(result))
+}
+
+export const removePodcastFromSaved = (result) => {
+    return (dispatch) => dispatch(removePodcast(result))
 }
