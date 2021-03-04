@@ -30,7 +30,7 @@ class Podcast extends Component {
     render(){
         
         return (
-            <Draggable draggableId={this.props.podcast.name} index={this.props.index}>
+            <Draggable draggableId={`${this.props.index}`} index={this.props.index}>
                 {(provided) => (
                     <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                         <div className="podcast-cell">
