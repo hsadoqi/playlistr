@@ -1,6 +1,7 @@
 import ls from 'local-storage'
 
 const initialState = {
+    currentPlaylist: "",
     remotePodcasts: [], 
     savedPodcasts: ls.get('savedPodcasts') || []
 }
@@ -18,6 +19,7 @@ const playlistReducer = (state = initialState, action) => {
             const newList = [...state.savedPodcasts, newSavedPodcast]
             ls.set('savedPodcasts', newList)
             return {
+                ...state,
                 remotePodcasts: newRemoteList,
                 savedPodcasts: newList
             }
@@ -38,7 +40,11 @@ const playlistReducer = (state = initialState, action) => {
                 ...state,
                 savedPodcasts: newState
             }
-
+        case "CHANGE_PLAYLIST": 
+            return {
+                ...state, 
+                currentPlaylist: action.payload
+            }
         default: 
             return state
     }

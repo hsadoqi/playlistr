@@ -1,58 +1,85 @@
-import React, { Component } from 'react'
 import './Podcast.css'
-import { connect } from 'react-redux'
-import { savePodcast } from '../store/actions/playlistActions'
 import { Draggable } from 'react-beautiful-dnd'
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { changePlaylist } from '../store/actions/playlistActions'
 
-class Podcast extends Component {
+const useAudio = props => {
+    const [audio] = useState(new Audio(props.podcast.audio))
+    const [play, setPlaying] = useState(false)
 
-    constructor(){
-        super()
-        this.state = {
-            play: false
+    useEffect(() => {
+        play ? audio.play() : audio.pause()
+      }
+    )
+
+    const toggle = () => {
+        setPlaying(!play)
+    }
+
+    useEffect(() => {
+        audio.addEventListener('ended', () => {
+            setPlaying(false)
+            if(props.playlist === "saved"){
+                props.changePodcast(props.index++)
+            } else {
+                props.changePodcast(null)
+            }       
+        })
+
+        return () => {
+            audio.removeEventListener('ended', () => setPlaying(false))
+        }
+    })
+
+    return [play, toggle]
+
+}
+
+const Podcast = (props) => {
+    const [play, toggle] = useAudio(props)
+    const currentPlaylist = useSelector(state => state.playlists.currentPlaylist)
+    const dispatch = useDispatch()
+    const togglePlaylist = (playlist) => dispatch(changePlaylist(props.playlist))
+
+    console.log(currentPlaylist)
+    const handleToggle = () => {
+        toggle()
+        props.changePodcast(props.index)
+        if(currentPlaylist !== props.playlist){
+            togglePlaylist(props.playlist)
         }
     }
 
-    componentDidMount(){
-        this.audio = new Audio(this.props.podcast.audio)
-    }
-
-    handlePlayPause = (e) => {
-        e.stopPropagation()
-        this.state.play ? this.audio.pause() : this.audio.play()
-        this.setState((prevState) => {
-            return {
-                play: !prevState.play
-            }
-        })
-    }
-
-    render(){
+    useEffect(() => {
+        if(props.currentPodcastIndex !== props.index && play){
+            toggle()
+        } else if(currentPlaylist !== props.playlist && play){
+            toggle()
+        }
+    })
         
-        return (
-            <Draggable draggableId={`${this.props.index}`} index={this.props.index}>
+    return (
+            <Draggable draggableId={`${props.index}`} index={props.index}>
                 {(provided) => (
                     <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                         <div className="podcast-cell">
                                 <div className="podcast-image">
-                                    <img src={this.props.podcast.image ? this.props.podcast.image : "https://bit.ly/3e378JH"} alt="Podcast"/>
+                                    <img src={props.podcast.image ? props.podcast.image : "https://bit.ly/3e378JH"} alt="Podcast"/>
                                 </div>
                                 <div className="podcast-content">
-                                    <p id="podcast-title"><strong>{this.props.podcast.title}</strong></p>
-                                    <p id="podcast-description">{this.props.podcast.description}</p>
+                                    <p id="podcast-title"><strong>{props.podcast.title}</strong></p>
+                                    <p id="podcast-description">{props.podcast.description}</p>
                                 </div>
                                 <div className="podcast-button">
-                                <button onClick={this.handlePlayPause}> {this.state.play ? "Pause" : "Play"}</button>
-                                </div>
-                                
+                                    <button onClick={handleToggle}> {play && props.currentPodcastIndex === props.index ? "Pause" : "Play"}</button>
+                                </div>     
                         </div>
                     </li>
                 )}
-
             </Draggable>
             
         )
-    }
 }
 
-export default connect(null, { savePodcast })(Podcast)
+export default Podcast
