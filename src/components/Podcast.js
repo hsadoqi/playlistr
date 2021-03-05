@@ -9,26 +9,22 @@ const useAudio = props => {
     const [play, setPlaying] = useState(false)
 
     useEffect(() => {
-        play ? audio.play() : audio.pause()
+       play ? audio.play() : audio.pause()
       }
     )
 
-    const toggle = () => {
-        setPlaying(!play)
-    }
+    const toggle = () => setPlaying(!play)
 
     useEffect(() => {
         audio.addEventListener('ended', () => {
             setPlaying(false)
-            if(props.playlist === "saved"){
-                props.changePodcast(props.index++)
-            } else {
-                props.changePodcast(null)
-            }       
+            if(props.queue){
+                props.addToQueue(props.index)
+            }
         })
 
         return () => {
-            audio.removeEventListener('ended', () => setPlaying(false))
+            audio.removeEventListener('pause', () => setPlaying(false))
         }
     })
 
@@ -37,26 +33,32 @@ const useAudio = props => {
 }
 
 const Podcast = (props) => {
+    console.log(props.currentPodcast)
     const [play, toggle] = useAudio(props)
+
+    // returns name of current playlist playing
     const currentPlaylist = useSelector(state => state.playlists.currentPlaylist)
+
     const dispatch = useDispatch()
     const togglePlaylist = (playlist) => dispatch(changePlaylist(props.playlist))
 
-    console.log(currentPlaylist)
     const handleToggle = () => {
         toggle()
-        props.changePodcast(props.index)
+        props.changePodcast(props.podcast)
+        // if we've changed playlists, update playlist in store in order to maintain effect created
         if(currentPlaylist !== props.playlist){
             togglePlaylist(props.playlist)
         }
     }
 
     useEffect(() => {
-        if(props.currentPodcastIndex !== props.index && play){
+        // if it's a different playlist (even if it's the same podcast), turn off
+        if(currentPlaylist !== props.playlist && play){
             toggle()
-        } else if(currentPlaylist !== props.playlist && play){
+        // if podcast is playing but isn't supposed to, turn off
+        } else if(props.currentPodcast !== props.podcast && play){
             toggle()
-        }
+        } 
     })
         
     return (
@@ -72,7 +74,7 @@ const Podcast = (props) => {
                                     <p id="podcast-description">{props.podcast.description}</p>
                                 </div>
                                 <div className="podcast-button">
-                                    <button onClick={handleToggle}> {play && props.currentPodcastIndex === props.index ? "Pause" : "Play"}</button>
+                                    <button onClick={handleToggle}> {play && props.currentPodcast === props.podcast ? "Pause" : "Play"}</button>
                                 </div>     
                         </div>
                     </li>
