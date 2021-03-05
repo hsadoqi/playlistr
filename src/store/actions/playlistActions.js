@@ -1,11 +1,8 @@
-// action creators
 const remote = (podcasts) => ({type: "FETCH_REMOTE", payload: podcasts})
 const save = (result) => ({type: 'SAVE_PODCAST', payload: result})
 const drag = (result) => ({type: "REORDER_PODCAST", payload: result})
 const remove = (result) => ({type: "REMOVE_PODCAST", payload: result})
 const change = (playlist) => ({type: "CHANGE_PLAYLIST", payload: playlist})
-
-// thunk functions 
 
 export const fetchRemote = () => {
     return (dispatch) => {

@@ -6,9 +6,19 @@ import { useState } from 'react'
 
 const SavedPodcastContainer = () => {
     const dispatch = useDispatch()
+
     const savedPlaylist = useSelector(state => state.playlists.savedPodcasts)
-    const [currentPodcastIndex, setPodcastIndex] = useState(null)
-    const changePodcast = (index) => index < savedPlaylist.length ? setPodcastIndex(index) : setPodcastIndex(null)
+    
+    const [currentPodcast, setCurrentPodcast] = useState(null)
+    const changePodcast = (podcast) => podcast ? setCurrentPodcast(podcast) : setCurrentPodcast(null)
+
+    const [queue, setQueue] = useState(null)
+
+    const addToQueue = (index) => {
+        const newQueue = [...savedPlaylist]
+        const newIndex = index++
+        setQueue(newQueue.splice(newIndex))
+    }
 
     return (
         <div className="saved-playlist-container">
@@ -22,9 +32,11 @@ const SavedPodcastContainer = () => {
                                             key={index} 
                                             podcast={podcast} 
                                             index={index} 
-                                            currentPodcastIndex={currentPodcastIndex} 
+                                            currentPodcast={currentPodcast} 
                                             changePodcast={changePodcast} 
                                             playlist="saved"
+                                            queue={queue}
+                                            addToQueue={addToQueue}
                                         />
                             })
                             } {provided.placeholder}</ul>
